@@ -3,6 +3,9 @@
  * 
  */
 import java.util.List;
+
+import org.eclipse.swt.widgets.Shell;
+
 import java.util.ArrayList;
 
 /**
@@ -29,9 +32,9 @@ public class LilLexiDoc
 	/**
 	 * add a char
 	 */
-	public void add(char c) 
+	public void add(char c, Shell shell)
 	{
-		glyphs.add(new Glyph(c));
+		glyphs.add(new Char(c, shell));
 		ui.updateUI();
 	}
 	

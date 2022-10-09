@@ -36,10 +36,10 @@ public class LilLexiUI
 		//---- create the window and the shell
 		Display.setAppName("Lil Lexi");
 		display = new Display();  
-		shell = new Shell(display);
-	    shell.setText("Lil Lexi");
-		shell.setSize(900,900);
-		shell.setLayout( new GridLayout());	
+		setShell(new Shell(display));
+	    getShell().setText("Lil Lexi");
+		getShell().setSize(900,900);
+		getShell().setLayout( new GridLayout());	
 	}
 		
 	/**
@@ -48,8 +48,8 @@ public class LilLexiUI
 	public void start()
 	{	
 		//---- create widgets for the interface
-	    Composite upperComp = new Composite(shell, SWT.NO_FOCUS);
-	    Composite lowerComp = new Composite(shell, SWT.NO_FOCUS);
+	    Composite upperComp = new Composite(getShell(), SWT.NO_FOCUS);
+	    Composite lowerComp = new Composite(getShell(), SWT.NO_FOCUS);
 	    
 	    //---- canvas for the document
 		canvas = new Canvas(upperComp, SWT.NONE);
@@ -57,11 +57,11 @@ public class LilLexiUI
 
 		canvas.addPaintListener(e -> {
 			System.out.println("PaintListener");
-			Rectangle rect = shell.getClientArea();
+			Rectangle rect = getShell().getClientArea();
 			e.gc.setBackground(display.getSystemColor(SWT.COLOR_WHITE)); 
             e.gc.fillRectangle(rect.x, rect.y, rect.width, rect.height);
-            e.gc.setForeground(display.getSystemColor(SWT.COLOR_BLUE)); 
-    		Font font = new Font(display, "Courier", 24, SWT.BOLD);
+            e.gc.setForeground(display.getSystemColor(SWT.COLOR_BLACK)); 
+    		Font font = new Font(display, "Arial", 12, SWT.NONE);
     		e.gc.setFont(font);
     		
     		List<Glyph> glyphs = currentDoc.getGlyphs();
@@ -72,6 +72,7 @@ public class LilLexiUI
     			column = (column + 18) % (40*18);
     			if (column == 0) row += 32;
     			System.out.println(g.getChar());
+    			System.out.println(g.getWidth());
     		}
 		});	
 		
@@ -86,7 +87,7 @@ public class LilLexiUI
         canvas.addKeyListener(new KeyListener() {
         	public void keyPressed(KeyEvent e) {
         		System.out.println("key " + e.character);
-        		lexiControl.add(e.character);
+        		lexiControl.add(e.character, shell);
         	}
         	public void keyReleased(KeyEvent e) {}
         });
@@ -122,11 +123,11 @@ public class LilLexiUI
 		MenuItem fileMenuHeader, insertMenuHeader, helpMenuHeader, fileExitItem, fileSaveItem, helpGetHelpItem;
 		MenuItem insertImageItem, insertRectItem;
 
-		menuBar = new Menu(shell, SWT.BAR);
+		menuBar = new Menu(getShell(), SWT.BAR);
 		
 		fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		fileMenuHeader.setText("File");
-		fileMenu = new Menu(shell, SWT.DROP_DOWN);
+		fileMenu = new Menu(getShell(), SWT.DROP_DOWN);
 		fileMenuHeader.setMenu(fileMenu);
 
 	    fileSaveItem = new MenuItem(fileMenu, SWT.PUSH);
@@ -136,7 +137,7 @@ public class LilLexiUI
 
 		insertMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		insertMenuHeader.setText("Insert");
-		insertMenu = new Menu(shell, SWT.DROP_DOWN);
+		insertMenu = new Menu(getShell(), SWT.DROP_DOWN);
 		insertMenuHeader.setMenu(insertMenu);
 
 	    insertImageItem = new MenuItem(insertMenu, SWT.PUSH);
@@ -146,7 +147,7 @@ public class LilLexiUI
 
 	    helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 	    helpMenuHeader.setText("Help");
-	    helpMenu = new Menu(shell, SWT.DROP_DOWN);
+	    helpMenu = new Menu(getShell(), SWT.DROP_DOWN);
 	    helpMenuHeader.setMenu(helpMenu);
 
 	    helpGetHelpItem = new MenuItem(helpMenu, SWT.PUSH);
@@ -154,11 +155,11 @@ public class LilLexiUI
 	    
 	    fileExitItem.addSelectionListener(new SelectionListener() {
 	    	public void widgetSelected(SelectionEvent event) {
-	    		shell.close();
+	    		getShell().close();
 	    		display.dispose();
 	    	}
 	    	public void widgetDefaultSelected(SelectionEvent event) {
-	    		shell.close();
+	    		getShell().close();
 	    		display.dispose();
 	    	}
 	    });
@@ -180,11 +181,11 @@ public class LilLexiUI
 	    //	Menu systemMenu = Display.getDefault().getSystemMenu();
      
 	    
-	    shell.setMenuBar(menuBar);
+	    getShell().setMenuBar(menuBar);
 	      
 		//---- event loop
-		shell.open();
-		while( !shell.isDisposed())
+		getShell().open();
+		while( !getShell().isDisposed())
 			if(!display.readAndDispatch()){}
 		display.dispose();
 	} 
@@ -207,5 +208,9 @@ public class LilLexiUI
 	 * setController
 	 */
 	public void setController(LilLexiControl lc) { lexiControl = lc; }
+
+	public Shell getShell() {return shell;}
+
+	public void setShell(Shell shell) {this.shell = shell;}
 }
 

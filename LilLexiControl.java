@@ -1,4 +1,4 @@
-
+import org.eclipse.swt.widgets.Shell;
 
 /**
  * Controller
@@ -18,9 +18,9 @@ public class LilLexiControl
 	/**
 	 * selectCard  user selects a card
 	 */
-	void add( char c ) 
+	void add( char c, Shell shell ) 
 	{	
-		currentDoc.add(c);
+		currentDoc.add(c, shell);
 	}	
 
 	/**
