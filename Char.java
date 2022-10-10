@@ -17,31 +17,24 @@ public class Char extends Glyph {
 		gc.drawString("" + c, x, y);
 	}
 
-	/**
-	 * Return character
-	 * 
-	 * @return character
-	 */
-	public char getChar() {
-		return this.c;
-	}
-	
-	/**
-	 * Set character to c
-	 * 
-	 * @param c
-	 */
-	public void setChar(char c) {
-		this.c = c;
-	}
-
 	@Override
 	public  int getWidth() {
 		return this.width;
 	}
-
+	
 	@Override
 	public int getHeight() {
 		return this.height;
 	}
+	
+	@Override
+	public char getChar() {
+		return this.c;
+	}
+	
+	@Override
+	public void setChar(char c) {
+		this.c = c;
+	}
+
 }

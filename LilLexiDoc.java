@@ -3,9 +3,6 @@
  * 
  */
 import java.util.List;
-
-import org.eclipse.swt.widgets.Shell;
-
 import java.util.ArrayList;
 
 /**
@@ -29,12 +26,31 @@ public class LilLexiDoc
 	 */
 	public void setUI(LilLexiUI ui) {this.ui = ui;}
 
+	
 	/**
 	 * add a char
 	 */
 	public void add(char c)
 	{
 		glyphs.add(new Char(c));
+		ui.updateUI();
+	}
+	
+//	/**
+//	 * add a picture
+//	 */
+//	public void add(String path) {
+//		glyphs.add(p);
+//		ui.updateUI();
+//	}
+	
+	public void addRow() {
+		glyphs.add(new Row());
+		ui.updateUI();
+	}
+	
+	public void addShape(int width, int height) {
+		glyphs.add(new Shape(width, height));
 		ui.updateUI();
 	}
 	

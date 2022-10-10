@@ -1,5 +1,3 @@
-import org.eclipse.swt.widgets.Shell;
-
 /**
  * Controller
  */

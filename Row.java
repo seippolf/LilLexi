@@ -41,6 +41,25 @@ public class Row extends Glyph {
 		glyphs.add(g);
 	}
 	
+	/**
+	 * Return number of children
+	 * 
+	 * @return number of children
+	 */
+	public int getLength() {
+		return this.length;
+	}
+	
+	@Override
+	public void draw(GC gc, int x, int y) {
+		for (Glyph g: glyphs) {
+			g.draw(gc, x, y);
+			
+			// Add column spacing
+			y += 10; //TODO decide on spacing constant
+		}
+	}
+	
 	@Override
 	public int getWidth() {
 		return this.width;
@@ -51,17 +70,15 @@ public class Row extends Glyph {
 		return this.height;
 	}
 	
-	public int getLength() {
-		return this.length;
+	@Override
+	public char getChar() {
+		return this.c;
 	}
 	
-	public void draw(GC gc, int x, int y) {
-		for (Glyph g: glyphs) {
-			g.draw(gc, x, y);
-			
-			// Add column spacing
-			y += 10; //TODO decide on spacing constant
-		}
+	@Override
+	public void setChar(char c) {
+		this.c = c;
 	}
+	
 
 }
