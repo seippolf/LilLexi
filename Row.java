@@ -1,36 +1,58 @@
-import java.awt.Canvas;
 import java.util.ArrayList;
-
 import org.eclipse.swt.graphics.GC;
 
 public class Row extends Glyph {
 	
-	private Canvas c;
-	private int row;
+	private char c;
+	private int width;
+	private int height;
+	
 	private int length;
 	
 	private ArrayList<Glyph> glyphs;
 	
-	public Row(Canvas c, int row) {
-		this.c = c;
-		this.row = row;
+	public Row() {
+		
+		// Non-Character glyphs should have a null character (for comparison)
+		this.c = Character.MIN_VALUE;
+		
+		// Dimensions
+		this.width = 0;
+		this.height = 0;
+		
+		// Children
 		this.length = 0;
+		this.glyphs = new ArrayList<>();
 	}
 	
 	public void add(Glyph g) {
+		
+		// Ensure height is equal to height of tallest child
+		if (this.height < g.getHeight()) {
+			this.height =  g.getHeight();
+		}
+		
+		// Ensure width is equal to total width of all children
+		this.width += g.getWidth();
+		
+		// Ensure length is equal to total number of children
+		this.length += 1;
+		
 		glyphs.add(g);
 	}
 	
 	@Override
 	public int getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.width;
 	}
 	
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.height;
+	}
+	
+	public int getLength() {
+		return this.length;
 	}
 	
 	public void draw(GC gc, int x, int y) {
@@ -38,7 +60,7 @@ public class Row extends Glyph {
 			g.draw(gc, x, y);
 			
 			// Add column spacing
-			y += 10;
+			y += 10; //TODO decide on spacing constant
 		}
 	}
 

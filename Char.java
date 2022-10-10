@@ -23,7 +23,7 @@ public class Char extends Glyph {
 	 * @return character
 	 */
 	public char getChar() {
-		return super.getChar();
+		return this.c;
 	}
 	
 	/**
@@ -37,11 +37,11 @@ public class Char extends Glyph {
 
 	@Override
 	public  int getWidth() {
-		return 0;
+		return this.width;
 	}
 
 	@Override
 	public int getHeight() {
-		return 0;
+		return this.height;
 	}
 }

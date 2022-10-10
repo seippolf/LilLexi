@@ -74,7 +74,6 @@ public class LilLexiUI
     			column = (column + 18) % (40*18);
     			if (column == 0) row += 32;
     			System.out.println(g.getChar());
-    			System.out.println(g.getWidth());
     		}
 		});	
 		
