@@ -68,7 +68,9 @@ public class LilLexiUI
     		int column = 0; int row = 0;
     		for (Glyph g: glyphs)
     		{
-    			e.gc.drawString("" + g.getChar(), column, row + 10);    
+//    			e.gc.drawString("" + g.getChar(), column, row + 10);
+    			g.draw(e.gc, column, row+10);
+    			
     			column = (column + 18) % (40*18);
     			if (column == 0) row += 32;
     			System.out.println(g.getChar());
@@ -87,7 +89,7 @@ public class LilLexiUI
         canvas.addKeyListener(new KeyListener() {
         	public void keyPressed(KeyEvent e) {
         		System.out.println("key " + e.character);
-        		lexiControl.add(e.character, shell);
+        		lexiControl.add(e.character);
         	}
         	public void keyReleased(KeyEvent e) {}
         });

@@ -1,6 +1,8 @@
 import java.awt.Canvas;
 import java.util.ArrayList;
 
+import org.eclipse.swt.graphics.GC;
+
 public class Row extends Glyph {
 	
 	private Canvas c;
@@ -19,7 +21,25 @@ public class Row extends Glyph {
 		glyphs.add(g);
 	}
 	
-	public void draw() {
-		
+	@Override
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
+	
+	@Override
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public void draw(GC gc, int x, int y) {
+		for (Glyph g: glyphs) {
+			g.draw(gc, x, y);
+			
+			// Add column spacing
+			y += 10;
+		}
+	}
+
 }

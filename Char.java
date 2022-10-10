@@ -1,44 +1,47 @@
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.FontMetrics;
 import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-
 
 public class Char extends Glyph {
 	
 	private char c;
 	private int width;
 	private int height;
-	private Shell shell;
-	private FontMetrics fm;
+
 	
-	public Char(char c, Shell shell) {
+	public Char(char c) {
 		this.c = c;
-		this.shell = shell;
-		
-		Text text = new Text(shell, SWT.NONE);
-		GC gc = new GC(text);
-		this.fm = gc.getFontMetrics();
-		this.width = getWidth();
-		this.height = getHeight();
+		this.height = 0;
+		this.height = 0;
 	}
 	
-	public void draw() {};
+	public void draw(GC gc, int x, int y) {
+		gc.drawString("" + c, x, y);
+	}
 
-	public char getChar() {return c;}
-	public void setChar(char c) {this.c = c;}
+	/**
+	 * Return character
+	 * 
+	 * @return character
+	 */
+	public char getChar() {
+		return super.getChar();
+	}
+	
+	/**
+	 * Set character to c
+	 * 
+	 * @param c
+	 */
+	public void setChar(char c) {
+		this.c = c;
+	}
 
 	@Override
 	public  int getWidth() {
-		width = (int) fm.getAverageCharacterWidth();
-		return width;
+		return 0;
 	}
 
 	@Override
 	public int getHeight() {
-		height = (int) fm.getHeight();
-		return height;
+		return 0;
 	}
-
 }

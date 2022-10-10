@@ -18,9 +18,9 @@ public class LilLexiControl
 	/**
 	 * selectCard  user selects a card
 	 */
-	void add( char c, Shell shell ) 
+	void add( char c) 
 	{	
-		currentDoc.add(c, shell);
+		currentDoc.add(c);
 	}	
 
 	/**

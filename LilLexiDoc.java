@@ -32,9 +32,9 @@ public class LilLexiDoc
 	/**
 	 * add a char
 	 */
-	public void add(char c, Shell shell)
+	public void add(char c)
 	{
-		glyphs.add(new Char(c, shell));
+		glyphs.add(new Char(c));
 		ui.updateUI();
 	}
 	
