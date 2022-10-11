@@ -13,7 +13,7 @@ public class Row extends Glyph {
 	
 	public Row() {
 		
-		// Non-Character glyphs should have a null character (for comparison)
+		// Rows should have a null character (for comparison)
 		this.c = Character.MIN_VALUE;
 		
 		// Dimensions

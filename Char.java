@@ -9,8 +9,8 @@ public class Char extends Glyph {
 	
 	public Char(char c) {
 		this.c = c;
-		this.height = 0;
-		this.height = 0;
+		this.width = 0;
+		this.height = 20;
 	}
 	
 	public void draw(GC gc, int x, int y) {

@@ -3,6 +3,9 @@
  * 
  */
 import java.util.List;
+
+import org.eclipse.swt.widgets.Display;
+
 import java.util.ArrayList;
 
 /**
@@ -48,13 +51,21 @@ public class LilLexiDoc
 		ui.updateUI();
 	}
 	
-//	/**
-//	 * add a picture
-//	 */
-//	public void add(String path) {
-//		glyphs.add(p);
-//		ui.updateUI();
-//	}
+	/**
+	 * add a picture (displayed as block)
+	 */
+	public void addPicture(Display display, String path) {
+		
+		// Put a picture on new row
+		currentRow = new Row();
+		currentRow.add(new Picture(display, path));
+		glyphs.add(currentRow);
+		
+		// Start on new row
+		currentRow = new Row();
+		glyphs.add(currentRow);
+		ui.updateUI();
+	}
 	
 	public void addRow() {
 		glyphs.add(new Row());
@@ -62,7 +73,14 @@ public class LilLexiDoc
 	}
 	
 	public void addShape(int width, int height) {
-		glyphs.add(new Shape(width, height));
+		// Put a shape on new row
+		currentRow = new Row();
+		currentRow.add(new Shape(width, height));
+		glyphs.add(currentRow);
+		
+		// Start on new row
+		currentRow = new Row();
+		glyphs.add(currentRow);
 		ui.updateUI();
 	}
 	

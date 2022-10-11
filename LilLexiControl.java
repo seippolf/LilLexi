@@ -1,3 +1,5 @@
+import org.eclipse.swt.widgets.Display;
+
 /**
  * Controller
  */
@@ -14,13 +16,27 @@ public class LilLexiControl
 	}
 	
 	/**
-	 * selectCard  user selects a card
+	 * add Char glyph
 	 */
-	void add( char c) 
+	void add(char c) 
 	{	
 		currentDoc.add(c);
-	}	
+	}
+	
+	/**
+	 * add Picture glyph
+	 */
+	void addPicture(Display display, String path) {
+		currentDoc.addPicture(display, path);
+	}
 
+	/**
+	 * add shape glyph
+	 */
+	void addShape(int width, int height) {
+		currentDoc.addShape(width, height);
+	}
+	
 	/**
 	 * quitEditor  user quits
 	 */

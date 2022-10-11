@@ -69,9 +69,9 @@ public class LilLexiUI
     		int column = 0, row = 0;
     		for (Glyph g: glyphs)
     		{
-    			System.out.println(g);
-    			g.draw(e.gc, column, row);
-    			row += 20;
+//    			System.out.println(g);
+    			g.draw(e.gc, column, row);			
+    			row += g.getHeight();
     		}
 		});	
 		
@@ -118,40 +118,53 @@ public class LilLexiUI
 		statusLabel.setText("Ready to edit!");
 		
 		//---- main menu
-		Menu menuBar, fileMenu, insertMenu, helpMenu;
-		MenuItem fileMenuHeader, insertMenuHeader, helpMenuHeader, fileExitItem, fileSaveItem, helpGetHelpItem;
-		MenuItem insertImageItem, insertRectItem;
+		Menu menuBar, fileMenu, insertMenu;
+		MenuItem fileMenuHeader, insertMenuHeader;
+		MenuItem  fileExitItem, insertImageItem, insertRectItem;
 
 		menuBar = new Menu(getShell(), SWT.BAR);
 		
+		//---- Set File and Insert menu headers
 		fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		fileMenuHeader.setText("File");
 		fileMenu = new Menu(getShell(), SWT.DROP_DOWN);
 		fileMenuHeader.setMenu(fileMenu);
-
-	    fileSaveItem = new MenuItem(fileMenu, SWT.PUSH);
-	    fileSaveItem.setText("Save");
-	    fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
-	    fileExitItem.setText("Exit");
-
 		insertMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		insertMenuHeader.setText("Insert");
 		insertMenu = new Menu(getShell(), SWT.DROP_DOWN);
 		insertMenuHeader.setMenu(insertMenu);
-
+		
+		//---- Insert -> Image Menu Item
 	    insertImageItem = new MenuItem(insertMenu, SWT.PUSH);
 	    insertImageItem.setText("Image");
+	    insertImageItem.addSelectionListener(new SelectionListener() {
+	    	public void widgetSelected(SelectionEvent event) {
+	    		lexiControl.addPicture(display, "C:\\Users\\justi\\Pictures\\Bubble_gum_gamerpic.0.jpg");
+	    		updateUI();
+	    	}
+	    	public void widgetDefaultSelected(SelectionEvent event) {
+	    		lexiControl.addPicture(display, "C:\\Users\\justi\\Pictures\\Bubble_gum_gamerpic.0.jpg");
+	    		updateUI();
+	    	}
+	    });
+	    
+	    //---- Insert -> Rectangle Menu Item
 	    insertRectItem = new MenuItem(insertMenu, SWT.PUSH);
 	    insertRectItem.setText("Rectangle");
-
-	    helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
-	    helpMenuHeader.setText("Help");
-	    helpMenu = new Menu(getShell(), SWT.DROP_DOWN);
-	    helpMenuHeader.setMenu(helpMenu);
-
-	    helpGetHelpItem = new MenuItem(helpMenu, SWT.PUSH);
-	    helpGetHelpItem.setText("Get Help");
+	    insertRectItem.addSelectionListener(new SelectionListener() {
+	    	public void widgetSelected(SelectionEvent event) {
+	    		lexiControl.addShape(250, 250);
+	    		updateUI();
+	    	}
+	    	public void widgetDefaultSelected(SelectionEvent event) {
+	    		lexiControl.addShape(250, 250);
+	    		updateUI();
+	    	}	    
+    	});
 	    
+	    //---- File -> Exit Menu Item
+	    fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
+	    fileExitItem.setText("Exit");
 	    fileExitItem.addSelectionListener(new SelectionListener() {
 	    	public void widgetSelected(SelectionEvent event) {
 	    		getShell().close();
@@ -162,31 +175,7 @@ public class LilLexiUI
 	    		display.dispose();
 	    	}
 	    });
-	    fileSaveItem.addSelectionListener(new SelectionListener() {
-	    	public void widgetSelected(SelectionEvent event) {
-	    		
-	    	}
-	    	public void widgetDefaultSelected(SelectionEvent event) {
-	    	}	    		
-	    });
 
-	    helpGetHelpItem.addSelectionListener(new SelectionListener() {
-	    	public void widgetSelected(SelectionEvent event) {
-	    	}
-	    	public void widgetDefaultSelected(SelectionEvent event) {
-	    	}	    		
-	    });	
-	    
-	    /**
-	     * 
-	     * TODO: Make SelectionListeners for Picture and Shape
-	     * 
-	     * 
-	     */
-	    
-	    //	Menu systemMenu = Display.getDefault().getSystemMenu();
-     
-	    
 	    getShell().setMenuBar(menuBar);
 	      
 		//---- event loop
