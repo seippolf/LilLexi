@@ -12,6 +12,8 @@ public class LilLexiDoc
 {
 	private LilLexiUI ui;
 	private List<Glyph> glyphs;
+
+	private Row currentRow;
 	
 	/**
 	 * Ctor
@@ -19,6 +21,8 @@ public class LilLexiDoc
 	public LilLexiDoc() 
 	{
 		glyphs = new ArrayList<Glyph>();
+		currentRow = new Row();
+		glyphs.add(currentRow);
 	}
 	
 	/**
@@ -32,7 +36,15 @@ public class LilLexiDoc
 	 */
 	public void add(char c)
 	{
-		glyphs.add(new Char(c));
+		// If there are 40 items in the current row, make a new one
+		if (currentRow.getLength() >= 40) {
+			currentRow = new Row();
+			glyphs.add(currentRow);
+		}
+		
+		// Add char and update
+		currentRow.add(new Char(c));
+		System.out.println("Total Rows" + glyphs.size());
 		ui.updateUI();
 	}
 	
@@ -57,7 +69,9 @@ public class LilLexiDoc
 	/**
 	 * gets
 	 */
-	public List<Glyph> getGlyphs(){return glyphs;}
+	public List<Glyph> getGlyphs(){
+		return glyphs;
+	}
 }
 
 

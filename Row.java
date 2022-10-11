@@ -51,9 +51,9 @@ public class Row extends Glyph {
 	}
 	
 	@Override
-	public void draw(GC gc, int x, int y) {
+	public void draw(GC gc, int y, int x) {
 		for (Glyph g: glyphs) {
-			g.draw(gc, x, y);
+			g.draw(gc, y, x);
 			
 			// Add column spacing
 			y += 10; //TODO decide on spacing constant
