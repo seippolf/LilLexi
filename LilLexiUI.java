@@ -68,13 +68,17 @@ public class LilLexiUI
     		int column = 0; int row = 0;
     		for (Glyph g: glyphs)
     		{
-//    			e.gc.drawString("" + g.getChar(), column, row + 10);
     			g.draw(e.gc, column, row+10);
     			
     			column = (column + 18) % (40*18);
     			if (column == 0) row += 32;
     			System.out.println(g.getChar());
     		}
+    		
+//    		Picture class test code:
+//    		Picture p = new Picture(display, "C:\\Users\\justi\\Pictures\\Bubble_gum_gamerpic.0.jpg");
+//    		p.draw(e.gc, column, row);
+
 		});	
 		
         canvas.addMouseListener(new MouseListener() {

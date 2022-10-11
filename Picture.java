@@ -6,28 +6,35 @@ import org.eclipse.swt.graphics.ImageData;
 public class Picture extends Glyph {
 	
 	private char c;
-	private String imageName;
+	private String path;
 	private Image image;
 	private int width;
 	private int height;
-	private Display display;
 
-	public Picture(String name, Display display) {
-		this.c = ' ';
-		this.imageName = name;
-		image = getImage(display);
-		this.width = getWidth();
-		this.height = getHeight();
+	public Picture(Display display, String path) {
+		this.c = ' '; // Char is a space for comparison operations
+		this.path = path;
+		
+		this.image = getImage(display);
+		this.width = this.image.getImageData().width;
+		this.height = this.image.getImageData().height;
 	}
 	
+	/**
+	 * Return an image from a file (located at path)
+	 * with passed display.
+	 * 
+	 * @param display
+	 * @return Image class from path and display
+	 */
 	private Image getImage(Display display) {
-		Image pic = 
-				new Image(display, Picture.class.getResourceAsStream(this.imageName));
-		return pic;
+		return new Image(display, path);
 	}
 	
 	/*
-	 * THIS MIGHT ACTUALLY WORK! lol
+	 * Draw an image with starting (top left)
+	 *  coordinates of x and y. Image size
+	 *  is determined by file.
 	 */
 	public void draw(GC gc, int x, int y) {
 		gc.drawImage(image, x, y);
@@ -56,6 +63,4 @@ public class Picture extends Glyph {
 	public void setChar(char c) {
 		this.c = c;
 	}
-
-
 }
