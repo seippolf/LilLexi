@@ -40,6 +40,7 @@ public class Row extends Glyph {
 		
 		this.glyphs.add(g);
 	}
+	
 	/**
 	 * Remove Glyph at passed index and reduce size
 	 * 
@@ -50,6 +51,16 @@ public class Row extends Glyph {
 			this.glyphs.remove(index);
 			this.length--;		
 		}
+	}
+	
+	/**
+	 * Return Glyph at index
+	 * 
+	 * @param index
+	 * @return Glyph
+	 */
+	public Glyph get(int index) {
+		return this.glyphs.get(index);
 	}
 	
 	/**

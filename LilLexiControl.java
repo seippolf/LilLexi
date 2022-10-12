@@ -23,8 +23,25 @@ public class LilLexiControl
 		currentDoc.add(c);
 	}
 	
+	/**
+	 * remove last Glyph
+	 */
 	void backspace() {
 		currentDoc.remove();
+	}
+	
+	/**
+	 * undo last Glyph
+	 */
+	void undo() {
+		currentDoc.undo();
+	}
+	
+	/**
+	 * redo last Glyph, if undone
+	 */
+	void redo() {
+		currentDoc.redo();
 	}
 	
 	/**

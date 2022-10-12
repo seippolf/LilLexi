@@ -98,23 +98,6 @@ public class LilLexiUI
         	}
         	public void keyReleased(KeyEvent e) {}
         });
-
-		Slider slider = new Slider (canvas, SWT.VERTICAL);
-		Rectangle clientArea = canvas.getClientArea ();
-		slider.setBounds (clientArea.width - 40, clientArea.y + 10, 32, clientArea.height);
-		slider.addListener (SWT.Selection, event -> {
-			String string = "SWT.NONE";
-			switch (event.detail) {
-				case SWT.DRAG: string = "SWT.DRAG"; break;
-				case SWT.HOME: string = "SWT.HOME"; break;
-				case SWT.END: string = "SWT.END"; break;
-				case SWT.ARROW_DOWN: string = "SWT.ARROW_DOWN"; break;
-				case SWT.ARROW_UP: string = "SWT.ARROW_UP"; break;
-				case SWT.PAGE_DOWN: string = "SWT.PAGE_DOWN"; break;
-				case SWT.PAGE_UP: string = "SWT.PAGE_UP"; break;
-			}
-			System.out.println ("Scroll detail -> " + string);
-		});
 		        
         //---- status label
         lowerComp.setLayout(new RowLayout());
@@ -126,13 +109,23 @@ public class LilLexiUI
 		statusLabel.setText("Ready to edit!");
 		
 		//---- main menu
-		Menu menuBar, fileMenu, insertMenu;
-		MenuItem fileMenuHeader, insertMenuHeader;
-		MenuItem  fileExitItem, insertImageItem, insertRectItem;
+		Menu 
+			menuBar, 
+			fileMenu, 
+			insertMenu, 
+			controlMenu;
+		MenuItem 
+			fileMenuHeader, 
+			insertMenuHeader, 
+			controlMenuHeader;
+		MenuItem  
+			fileExitItem,
+			insertImageItem, insertRectItem, 
+			controlUndoItem, controlRedoItem;
 
 		menuBar = new Menu(getShell(), SWT.BAR);
 		
-		//---- Set File and Insert menu headers
+		//---- Set File, Insert, and Control menu headers
 		fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
 		fileMenuHeader.setText("File");
 		fileMenu = new Menu(getShell(), SWT.DROP_DOWN);
@@ -141,6 +134,10 @@ public class LilLexiUI
 		insertMenuHeader.setText("Insert");
 		insertMenu = new Menu(getShell(), SWT.DROP_DOWN);
 		insertMenuHeader.setMenu(insertMenu);
+		controlMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+		controlMenuHeader.setText("Control");
+		controlMenu = new Menu(getShell(), SWT.DROP_DOWN);
+		controlMenuHeader.setMenu(controlMenu);
 		
 		//---- Insert -> Image Menu Item
 	    insertImageItem = new MenuItem(insertMenu, SWT.PUSH);
@@ -181,6 +178,34 @@ public class LilLexiUI
 	    	public void widgetDefaultSelected(SelectionEvent event) {
 	    		getShell().close();
 	    		display.dispose();
+	    	}
+	    });
+	    
+	    //---- Control -> Undo Menu Item
+	    controlUndoItem = new MenuItem(controlMenu, SWT.PUSH);
+	    controlUndoItem.setText("Undo");
+	    controlUndoItem.addSelectionListener(new SelectionListener() {
+	    	public void widgetSelected(SelectionEvent event) {
+	    		currentDoc.undo();
+	    		updateUI();	
+	    	}
+	    	public void widgetDefaultSelected(SelectionEvent event) {
+	    		currentDoc.undo();
+	    		updateUI();
+	    	}
+	    });
+	    
+	    //---- Control -> Redo Menu Item
+	    controlRedoItem = new MenuItem(controlMenu, SWT.PUSH);
+	    controlRedoItem.setText("Redo");
+	    controlRedoItem.addSelectionListener(new SelectionListener() {
+	    	public void widgetSelected(SelectionEvent event) {
+	    		currentDoc.redo();
+	    		updateUI();
+	    	}
+	    	public void widgetDefaultSelected(SelectionEvent event) {
+	    		currentDoc.redo();
+	    		updateUI();
 	    	}
 	    });
 

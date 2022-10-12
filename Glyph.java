@@ -3,8 +3,7 @@ import org.eclipse.swt.graphics.GC;
 /**
  * Glyph
  */
-public abstract class Glyph
-{
+public abstract class Glyph {
 	public Glyph() {} // Empty constructor
 	
 	public abstract void draw(GC gc, int x, int y);

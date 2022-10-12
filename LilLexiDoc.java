@@ -18,37 +18,39 @@ public class LilLexiDoc
 
 	private Row currentRow;
 	
+	private Glyph undoneGlyph;
+	
 	/**
 	 * Ctor
 	 */
-	public LilLexiDoc() 
-	{
-		glyphs = new ArrayList<Glyph>();
-		currentRow = new Row();
-		glyphs.add(currentRow);
+	public LilLexiDoc() {
+		this.glyphs = new ArrayList<Glyph>();
+		this.currentRow = new Row();
+		this.glyphs.add(currentRow);
+		this.undoneGlyph = null;
 	}
 	
 	/**
 	 * setUI
 	 */
-	public void setUI(LilLexiUI ui) {this.ui = ui;}
+	public void setUI(LilLexiUI ui) {
+		this.ui = ui;
+	}
 
-	
 	/**
 	 * add a char
 	 */
-	public void add(char c)
-	{
+	public void add(char c) {
 		// If there are 40 items in the current row, make a new one
-		if (currentRow.getLength() >= 40) {
-			currentRow = new Row();
-			glyphs.add(currentRow);
+		if (this.currentRow.getLength() >= 40) {
+			this.currentRow = new Row();
+			this.glyphs.add(currentRow);
 		}
 		
 		// Add char and update
-		currentRow.add(new Char(c));
-		System.out.println("Total Rows" + glyphs.size());
-		ui.updateUI();
+		this.currentRow.add(new Char(c));
+		System.out.println("Total Rows" + this.glyphs.size());
+		this.ui.updateUI();
 	}
 	
 	/**
@@ -57,14 +59,14 @@ public class LilLexiDoc
 	public void addPicture(Display display, String path) {
 		
 		// Put a picture on new row
-		currentRow = new Row();
-		currentRow.add(new Picture(display, path));
-		glyphs.add(currentRow);
+		this.currentRow = new Row();
+		this.currentRow.add(new Picture(display, path));
+		this.glyphs.add(this.currentRow);
 		
 		// Start on new row
-		currentRow = new Row();
-		glyphs.add(currentRow);
-		ui.updateUI();
+		this.currentRow = new Row();
+		this.glyphs.add(this.currentRow);
+		this.ui.updateUI();
 	}
 	
 	public void addRow() {
@@ -72,35 +74,83 @@ public class LilLexiDoc
 		ui.updateUI();
 	}
 	
+	/**
+	 * Add a shape (displayed as block)
+	 */
 	public void addShape(int width, int height) {
 		// Put a shape on new row
-		currentRow = new Row();
-		currentRow.add(new Shape(width, height));
-		glyphs.add(currentRow);
+		this.currentRow = new Row();
+		this.currentRow.add(new Shape(width, height));
+		this.glyphs.add(this.currentRow);
 		
 		// Start on new row
-		currentRow = new Row();
-		glyphs.add(currentRow);
-		ui.updateUI();
+		this.currentRow = new Row();
+		this.glyphs.add(this.currentRow);
+		this.ui.updateUI();
 	}
 	
-	public void remove() {
+	/**
+	 * Remove last Glyph and return it
+	 * 
+	 * @return removed Glyph
+	 */
+	public Glyph remove() {
 		int glyphSize = glyphs.size();
-		Row currentRow  = (Row) glyphs.get(glyphSize - 1);
-		int currentRowLength = currentRow.getLength();
+		int currentRowLength = this.currentRow.getLength();
+		Glyph returnGlyph = null;
 		
 		// If the current row is empty...
-		if (currentRow.getLength() == 0) {
+		if (this.currentRow.getLength() == 0) {
 			// Go back to the previous row if there is one
 			if(glyphSize > 1) {
-				glyphs.remove(glyphSize - 1);				
+				returnGlyph = this.glyphs.get(glyphSize - 1);
+				this.glyphs.remove(glyphSize - 1);				
 			}
 		} else {
 			// Remove most recent Glyph on document
-			currentRow.remove(currentRowLength - 1);
+			returnGlyph = currentRow.get(currentRowLength -1);
+			this.currentRow.remove(currentRowLength - 1);
 		}
 		
-		ui.updateUI();
+		this.ui.updateUI();
+		return returnGlyph;
+	}
+	
+	/**
+	 * Undo last Glyph
+	 */
+	public void undo() {
+		// Store most recent
+		this.undoneGlyph = 	this.remove();
+	}
+	
+	/**
+	 * Redo last Glyph if undone
+	 */
+	public void redo() {
+		// Make sure there is something to redo
+		if (this.undoneGlyph != null) {
+			// If you undo a row creation, make a new row
+			if(this.undoneGlyph instanceof Row) {
+				this.addRow();
+				
+			} else if (this.undoneGlyph instanceof Char){
+				this.currentRow.add(undoneGlyph);
+				
+			} else {
+				// Re-add picture or shape
+				this.currentRow = new Row();
+				this.currentRow.add(undoneGlyph);
+				this.glyphs.add(this.currentRow);
+				
+				// re-add new line
+				this.currentRow = new Row();
+				this.glyphs.add(currentRow);
+				this.ui.updateUI();
+			}
+			
+			this.undoneGlyph = null;			
+		}
 	}
 	
 	/**
