@@ -30,7 +30,7 @@ public class Shape extends Glyph {
 	public char getChar() {
 		return this.c;
 	}
-
+	
 	@Override
 	public void setChar(char c) {
 		this.c = c;

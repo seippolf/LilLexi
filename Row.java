@@ -38,7 +38,18 @@ public class Row extends Glyph {
 		// Ensure length is equal to total number of children
 		this.length += 1;
 		
-		glyphs.add(g);
+		this.glyphs.add(g);
+	}
+	/**
+	 * Remove Glyph at passed index and reduce size
+	 * 
+	 * @param index
+	 */
+	public void remove(int index) {
+		if (this.length >= index +1) {
+			this.glyphs.remove(index);
+			this.length--;		
+		}
 	}
 	
 	/**
@@ -52,11 +63,11 @@ public class Row extends Glyph {
 	
 	@Override
 	public void draw(GC gc, int y, int x) {
-		for (Glyph g: glyphs) {
+		for (Glyph g: this.glyphs) {
 			g.draw(gc, y, x);
 			
 			// Add column spacing
-			y += 10; //TODO decide on spacing constant
+			y += 15; //TODO decide on spacing constant
 		}
 	}
 	
@@ -74,7 +85,7 @@ public class Row extends Glyph {
 	public char getChar() {
 		return this.c;
 	}
-	
+		
 	@Override
 	public void setChar(char c) {
 		this.c = c;

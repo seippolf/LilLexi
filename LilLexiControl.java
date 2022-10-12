@@ -23,6 +23,10 @@ public class LilLexiControl
 		currentDoc.add(c);
 	}
 	
+	void backspace() {
+		currentDoc.remove();
+	}
+	
 	/**
 	 * add Picture glyph
 	 */

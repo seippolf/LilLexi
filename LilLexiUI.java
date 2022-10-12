@@ -85,8 +85,16 @@ public class LilLexiUI
         
         canvas.addKeyListener(new KeyListener() {
         	public void keyPressed(KeyEvent e) {
-        		System.out.println("key " + e.character);
-        		lexiControl.add(e.character);
+        		char c = e.character;
+        		
+        		// Conditional for special keys (<-, ->, BACKSPACE, ENTER)
+        		if (c == '\b') {
+        			System.out.println("key BACKSPACE");
+        			lexiControl.backspace();
+        		} else {
+        			System.out.println("key " + e.character);
+        			lexiControl.add(e.character);        			
+        		}
         	}
         	public void keyReleased(KeyEvent e) {}
         });

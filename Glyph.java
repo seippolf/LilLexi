@@ -15,5 +15,5 @@ public abstract class Glyph
 	
 	public abstract int getWidth();
 	
-	public abstract int getHeight();
+	public abstract int getHeight();	
 }

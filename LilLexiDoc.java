@@ -84,6 +84,25 @@ public class LilLexiDoc
 		ui.updateUI();
 	}
 	
+	public void remove() {
+		int glyphSize = glyphs.size();
+		Row currentRow  = (Row) glyphs.get(glyphSize - 1);
+		int currentRowLength = currentRow.getLength();
+		
+		// If the current row is empty...
+		if (currentRow.getLength() == 0) {
+			// Go back to the previous row if there is one
+			if(glyphSize > 1) {
+				glyphs.remove(glyphSize - 1);				
+			}
+		} else {
+			// Remove most recent Glyph on document
+			currentRow.remove(currentRowLength - 1);
+		}
+		
+		ui.updateUI();
+	}
+	
 	/**
 	 * gets
 	 */
