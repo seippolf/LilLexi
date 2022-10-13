@@ -58,16 +58,7 @@ public class LilLexiDoc
 	 * add a picture (displayed as block)
 	 */
 	public void addPicture(Display display, Image image){
-		
-		// Put a picture on new row
-		this.currentRow = new Row();
 		this.currentRow.add(new Picture(display, image));
-		this.glyphs.add(this.currentRow);
-		
-		// Start on new row
-		this.currentRow = new Row();
-		this.glyphs.add(this.currentRow);
-		this.ui.updateUI();
 	}
 	
 	public void addRow() {
@@ -79,15 +70,7 @@ public class LilLexiDoc
 	 * Add a shape (displayed as block)
 	 */
 	public void addShape(int width, int height) {
-		// Put a shape on new row
-		this.currentRow = new Row();
 		this.currentRow.add(new Shape(width, height));
-		this.glyphs.add(this.currentRow);
-		
-		// Start on new row
-		this.currentRow = new Row();
-		this.glyphs.add(this.currentRow);
-		this.ui.updateUI();
 	}
 	
 	/**
@@ -105,7 +88,10 @@ public class LilLexiDoc
 			// Go back to the previous row if there is one
 			if(glyphSize > 1) {
 				returnGlyph = this.glyphs.get(glyphSize - 1);
-				this.glyphs.remove(glyphSize - 1);				
+				this.glyphs.remove(glyphSize - 1);
+				
+				// Go back to previous row
+				this.currentRow = (Row) this.glyphs.get(glyphSize - 2);
 			}
 		} else {
 			// Remove most recent Glyph on document
@@ -123,13 +109,6 @@ public class LilLexiDoc
 	public void undo() {
 		// Store most recent
 		this.undoneGlyph = 	this.remove();
-		
-		// Undo character before new lining
-		if (this.undoneGlyph instanceof Row) {
-			this.undoneGlyph = 	this.remove();
-			System.out.println(this.undoneGlyph);
-			
-		}
 	}
 	
 	/**
@@ -146,15 +125,8 @@ public class LilLexiDoc
 				this.currentRow.add(undoneGlyph);
 				
 			} else {
-				// Re-add picture or shape
-				this.currentRow = new Row();
 				this.currentRow.add(undoneGlyph);
 				this.glyphs.add(this.currentRow);
-				
-				// re-add new line
-				this.currentRow = new Row();
-				this.glyphs.add(currentRow);
-				this.ui.updateUI();
 			}
 			
 			this.undoneGlyph = null;			

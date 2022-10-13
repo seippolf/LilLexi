@@ -42,7 +42,8 @@ public class Row extends Glyph {
 	}
 	
 	/**
-	 * Remove Glyph at passed index and reduce size
+	 * Remove Glyph at passed index reconfigure height
+	 *  and reduce size
 	 * 
 	 * @param index
 	 */
@@ -50,6 +51,14 @@ public class Row extends Glyph {
 		if (this.length >= index +1) {
 			this.glyphs.remove(index);
 			this.length--;		
+		}
+		
+		// Reset height (in case it decreased)
+		for (Glyph g : this.glyphs) {
+			this.height = 0;
+			if (g.getHeight() > this.height) {
+				this.height = g.getHeight();
+			}
 		}
 	}
 	

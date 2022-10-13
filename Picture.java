@@ -6,7 +6,6 @@ import org.eclipse.swt.graphics.ImageData;
 public class Picture extends Glyph {
 	
 	private char c;
-	private String path;
 	private Image image;
 	private int width;
 	private int height;
@@ -18,17 +17,6 @@ public class Picture extends Glyph {
 		this.image = image; // getImage(display);
 		this.width = this.image.getImageData().width;
 		this.height = this.image.getImageData().height;
-	}
-	
-	/**
-	 * Return an image from a file (located at path)
-	 * with passed display.
-	 * 
-	 * @param display
-	 * @return Image class from path and display
-	 */
-	private Image getImage(Display display) {
-		return new Image(display, path);
 	}
 	
 	/*
