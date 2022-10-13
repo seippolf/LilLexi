@@ -17,6 +17,20 @@ public class LilLexiControl
 	}
 	
 	/**
+	 * Curse forward
+	 */
+	void next() {
+		
+	}
+	
+	/**
+	 * Curse backward
+	 */
+	void prev() {
+		
+	}
+	
+	/**
 	 * add Char glyph
 	 */
 	void add(char c) 

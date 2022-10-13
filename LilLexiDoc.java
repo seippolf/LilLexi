@@ -123,6 +123,13 @@ public class LilLexiDoc
 	public void undo() {
 		// Store most recent
 		this.undoneGlyph = 	this.remove();
+		
+		// Undo character before new lining
+		if (this.undoneGlyph instanceof Row) {
+			this.undoneGlyph = 	this.remove();
+			System.out.println(this.undoneGlyph);
+			
+		}
 	}
 	
 	/**
