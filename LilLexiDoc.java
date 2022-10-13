@@ -4,6 +4,7 @@
  */
 import java.util.List;
 
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 import java.util.ArrayList;
@@ -56,11 +57,11 @@ public class LilLexiDoc
 	/**
 	 * add a picture (displayed as block)
 	 */
-	public void addPicture(Display display, String path) {
+	public void addPicture(Display display, Image image){
 		
 		// Put a picture on new row
 		this.currentRow = new Row();
-		this.currentRow.add(new Picture(display, path));
+		this.currentRow.add(new Picture(display, image));
 		this.glyphs.add(this.currentRow);
 		
 		// Start on new row
@@ -158,6 +159,10 @@ public class LilLexiDoc
 	 */
 	public List<Glyph> getGlyphs(){
 		return glyphs;
+	}
+	
+	public int getDocHeight() {
+		return this.glyphs.size();
 	}
 }
 

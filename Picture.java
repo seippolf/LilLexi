@@ -11,11 +11,11 @@ public class Picture extends Glyph {
 	private int width;
 	private int height;
 
-	public Picture(Display display, String path) {
+	public Picture(Display display, Image image){
 		this.c = ' '; // Char is a space for comparison operations
-		this.path = path;
+		//this.path = path;
 		
-		this.image = getImage(display);
+		this.image = image; // getImage(display);
 		this.width = this.image.getImageData().width;
 		this.height = this.image.getImageData().height;
 	}

@@ -1,3 +1,4 @@
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 /**
@@ -47,8 +48,8 @@ public class LilLexiControl
 	/**
 	 * add Picture glyph
 	 */
-	void addPicture(Display display, String path) {
-		currentDoc.addPicture(display, path);
+	void addPicture(Display display, Image image) {
+		currentDoc.addPicture(display, image);
 	}
 
 	/**

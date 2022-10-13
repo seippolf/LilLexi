@@ -1,8 +1,3 @@
-/**
- * UI for Lil Lexi
- * 
- */
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.widgets.*;
@@ -11,7 +6,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
-import org.eclipse.swt.graphics.Font;
+
 import java.util.List;
 
 
@@ -143,14 +138,40 @@ public class LilLexiUI
 	    insertImageItem = new MenuItem(insertMenu, SWT.PUSH);
 	    insertImageItem.setText("Image");
 	    insertImageItem.addSelectionListener(new SelectionListener() {
-	    	public void widgetSelected(SelectionEvent event) {
-	    		lexiControl.addPicture(display, "C:\\Users\\justi\\Pictures\\Bubble_gum_gamerpic.0.jpg");
-	    		updateUI();
-	    	}
-	    	public void widgetDefaultSelected(SelectionEvent event) {
-	    		lexiControl.addPicture(display, "C:\\Users\\justi\\Pictures\\Bubble_gum_gamerpic.0.jpg");
-	    		updateUI();
-	    	}
+	    	
+    	public void widgetSelected(SelectionEvent event) {
+    		
+    		//-------- Opens Window Finder to select image
+    		Image originalImage = null;
+    		  FileDialog dialog = new FileDialog(shell, SWT.OPEN);
+    		  dialog.setText("Open an .jpeg File");
+    		  String string = dialog.open();
+    		  if (string != null) {
+    		    originalImage = new Image(display, string);
+    		  }
+    		  if (originalImage == null) {
+    			  originalImage = new Image(display, 
+    					  LilLexiUI.class.getResourceAsStream("image.jpeg"));
+    		  }
+    		  lexiControl.addPicture(display,originalImage);
+    		updateUI();
+    	}
+    	public void widgetDefaultSelected(SelectionEvent event) {
+    		//----------------------------------
+    		Image originalImage = null;
+    		  FileDialog dialog = new FileDialog(shell, SWT.OPEN);
+    		  dialog.setText("Open an .jpeg File");
+    		  String string = dialog.open();
+    		  if (string != null) {
+    		    originalImage = new Image(display, string);
+    		  }
+    		  if (originalImage == null) {
+    			  originalImage = new Image(display, 
+    					  LilLexiUI.class.getResourceAsStream("image.jpeg"));
+    		  }
+    		lexiControl.addPicture(display,originalImage);
+    		updateUI();
+    	}	
 	    });
 	    
 	    //---- Insert -> Rectangle Menu Item
@@ -241,4 +262,3 @@ public class LilLexiUI
 
 	public void setShell(Shell shell) {this.shell = shell;}
 }
-
