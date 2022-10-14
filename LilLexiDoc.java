@@ -171,7 +171,7 @@ public class LilLexiDoc
 				doc += cha.getChar();
 			}
 		}
-		String [] docWords = doc.split(" ");
+		String [] docWords = doc.split("[ -]");
 		
 		for (int i = 0; i < docWords.length; i++) {
 			if (!dictionary.contains(docWords[i])) {return false;}
