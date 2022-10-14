@@ -173,6 +173,7 @@ public class LilLexiDoc
 		}
 		String [] docWords = doc.split("[ -]");
 		
+		if (doc.length() == 0) {return true;}
 		for (int i = 0; i < docWords.length; i++) {
 			if (!dictionary.contains(docWords[i])) {return false;}
 		}
