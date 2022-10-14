@@ -3,10 +3,14 @@
  * 
  */
 import java.util.List;
+import java.util.Scanner;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -148,6 +152,39 @@ public class LilLexiDoc
 	public int getDocHeight() {
 		return this.glyphs.size();
 	}
+
+	public boolean spellCheck() throws FileNotFoundException {
+		ArrayList<String> dictionary = getDictionary();
+		String doc = "";
+		for ( Glyph g : glyphs) {
+			doc += g.getChar();
+		}
+		String [] docWords = doc.split(" ");
+		/**
+		for (String w : docWords) {
+			for ( String d: dictionary) {
+				if (w != d)
+			}
+			*/
+			return false;
+		//}
+		//return true;
+	}
+
+	private ArrayList<String> getDictionary() throws FileNotFoundException {
+		ArrayList<String> words = new ArrayList<String>();
+		Scanner scanner = new Scanner(new File("dictionary.txt"));
+		scanner.nextLine();
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
+            words.add(line);
+        }
+        return words;
+	}
+
+	/**
+	 * 
+	 */
 }
 
 

@@ -2,11 +2,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.graphics.*;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 
@@ -31,10 +33,11 @@ public class LilLexiUI
 		//---- create the window and the shell
 		Display.setAppName("Lil Lexi");
 		display = new Display();  
-		setShell(new Shell(display));
+		setShell(new Shell(display, SWT.SHELL_TRIM | SWT.NO_BACKGROUND | 
+						SWT.NO_REDRAW_RESIZE | SWT.V_SCROLL));
 	    getShell().setText("Lil Lexi");
-		getShell().setSize(900,900);
-		getShell().setLayout( new GridLayout());	
+		getShell().setSize(675,840);
+		getShell().setLayout(new GridLayout());	
 	}
 		
 	/**
@@ -48,7 +51,7 @@ public class LilLexiUI
 	    
 	    //---- canvas for the document
 		canvas = new Canvas(upperComp, SWT.NONE);
-		canvas.setSize(800,800);
+		canvas.setSize(800,700);
 
 		canvas.addPaintListener(e -> {
 			System.out.println("PaintListener");
@@ -104,14 +107,42 @@ public class LilLexiUI
         	public void keyReleased(KeyEvent e) {}
         });
 		        
+        //---- scroll bar
+        Point origin = new Point(0,0);
+        ScrollBar vBar = shell.getVerticalBar();
+        vBar.addListener(SWT.Selection, e -> {
+        	int vSelection = vBar.getSelection();
+        	int destY = -vSelection + origin.y;
+        	canvas.scroll(0, destY, 0, 0, 800, 800, false);
+        	origin.y = -vSelection;
+        });
+        
+        canvas.addListener(SWT.Resize, e -> {
+        	Rectangle rect = canvas.getClientArea();
+        	Rectangle client = canvas.getClientArea();
+        	
+        	vBar.setMaximum (rect.height);
+        	vBar.setThumb(Math.min (rect.height, client.height));
+        	int vPage = rect.height - client.height;
+        	int vSelection = vBar.getSelection();
+        	
+        	if (vSelection >= vPage) {
+        		if (vPage <= 0) vSelection = 0;
+        		origin.y = -vSelection;
+        	}
+        });
+        
+        
         //---- status label
         lowerComp.setLayout(new RowLayout());
+        lowerComp.setSize(800, 200);
         statusLabel = new Label(lowerComp, SWT.NONE);		
-
-		FontData[] fD = statusLabel.getFont().getFontData();
-		fD[0].setHeight(24);
-		statusLabel.setFont( new Font(display,fD[0]));
-		statusLabel.setText("Ready to edit!");
+        statusLabel.setSize(200,800);
+        
+		//FontData[] fD = statusLabel.getFont().getFontData();
+		//fD[0].setHeight(24);
+		statusLabel.setFont(new Font(display,"Arial", 20,20));
+		statusLabel.setText("Ready to edit!                                      ");
 		
 		//---- main menu
 		Menu 
@@ -126,7 +157,7 @@ public class LilLexiUI
 		MenuItem  
 			fileExitItem,
 			insertImageItem, insertRectItem, 
-			controlUndoItem, controlRedoItem;
+			controlUndoItem, controlRedoItem, controlSpellCheckItem;
 
 		menuBar = new Menu(getShell(), SWT.BAR);
 		
@@ -236,6 +267,40 @@ public class LilLexiUI
 	    	}
 	    	public void widgetDefaultSelected(SelectionEvent event) {
 	    		currentDoc.redo();
+	    		updateUI();
+	    	}
+	    });
+	    
+	  //---- Control -> Spell Check Menu Item
+	    controlSpellCheckItem = new MenuItem(controlMenu, SWT.PUSH);
+	    controlSpellCheckItem.setText("Spell Check");
+	    controlSpellCheckItem.addSelectionListener(new SelectionListener() {
+	    	public void widgetSelected(SelectionEvent event) {
+	    		try {
+					if (currentDoc.spellCheck()) {
+						statusLabel.setText("No errors found!");
+					} else {
+						statusLabel.setForeground(display.getSystemColor(SWT.COLOR_RED));
+						statusLabel.setText("At least one spelling mistake found!");
+					}
+				} catch (FileNotFoundException e) {
+					System.out.println("Sorry, dictionary not found.");
+					e.printStackTrace();
+				};
+	    		updateUI();
+	    	}
+	    	public void widgetDefaultSelected(SelectionEvent event) {
+	    		try {
+					if (currentDoc.spellCheck()) {
+						statusLabel.setText("No errors found!");
+					} else {
+						statusLabel.setForeground(display.getSystemColor(SWT.COLOR_RED));
+						statusLabel.setText("At least one spelling mistake found!");
+					}
+				} catch (FileNotFoundException e) {
+					System.out.println("Sorry, dictionary not found.");
+					e.printStackTrace();
+				};
 	    		updateUI();
 	    	}
 	    });

@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
@@ -78,6 +80,14 @@ public class LilLexiControl
 	 */
 	void addShape(int width, int height) {
 		currentDoc.addShape(width, height);
+	}
+	
+	/**
+	 * spell check
+	 * @throws FileNotFoundException 
+	 */
+	void spellCheck() throws FileNotFoundException {
+		boolean errors = currentDoc.spellCheck();
 	}
 	
 	/**
