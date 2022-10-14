@@ -21,8 +21,9 @@ public class LilLexiDoc
 	
 	private Glyph undoneGlyph;
 	
+	
 	/**
-	 * Ctor
+ * Ctor
 	 */
 	public LilLexiDoc() {
 		this.glyphs = new ArrayList<Glyph>();
@@ -61,8 +62,13 @@ public class LilLexiDoc
 		this.currentRow.add(new Picture(display, image));
 	}
 	
+	/**
+	 * Add row and set to current
+	 */
 	public void addRow() {
-		glyphs.add(new Row());
+		Row r = new Row();
+		this.currentRow = r;
+		glyphs.add(r);
 		ui.updateUI();
 	}
 	
@@ -126,7 +132,6 @@ public class LilLexiDoc
 				
 			} else {
 				this.currentRow.add(undoneGlyph);
-				this.glyphs.add(this.currentRow);
 			}
 			
 			this.undoneGlyph = null;			

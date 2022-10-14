@@ -82,12 +82,18 @@ public class LilLexiUI
         	public void keyPressed(KeyEvent e) {
         		char c = e.character;
         		
-        		// Conditional for special keys (<-, ->, BACKSPACE, ENTER)
-        		if (c == '\b') {
-        			System.out.println("key BACKSPACE");
+     
+        		// Conditional for special keys (BACKSPACE, ENTER, <-, ->,)
+        		if (e.keyCode == 8) {
         			lexiControl.backspace();
+        		} else if (e.keyCode == 13) {
+        			System.out.println("ENTER");
+        		} else if (e.keyCode == 16777219) {
+        			System.out.println("<-");
+        		} else if (e.keyCode == 16777220) {
+        			System.out.println("->"); // 
         		} else {
-        			System.out.println("key " + e.character);
+        			System.out.println("key " + e.keyCode);
         			lexiControl.add(e.character);        			
         		}
         	}
