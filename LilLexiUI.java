@@ -278,6 +278,7 @@ public class LilLexiUI
 	    	public void widgetSelected(SelectionEvent event) {
 	    		try {
 					if (currentDoc.spellCheck()) {
+						statusLabel.setForeground(display.getSystemColor(SWT.COLOR_BLACK));
 						statusLabel.setText("No errors found!");
 					} else {
 						statusLabel.setForeground(display.getSystemColor(SWT.COLOR_RED));
@@ -292,6 +293,7 @@ public class LilLexiUI
 	    	public void widgetDefaultSelected(SelectionEvent event) {
 	    		try {
 					if (currentDoc.spellCheck()) {
+						statusLabel.setForeground(display.getSystemColor(SWT.COLOR_BLACK));
 						statusLabel.setText("No errors found!");
 					} else {
 						statusLabel.setForeground(display.getSystemColor(SWT.COLOR_RED));

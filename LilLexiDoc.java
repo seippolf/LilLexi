@@ -4,14 +4,13 @@
  */
 import java.util.List;
 import java.util.Scanner;
-
+import java.util.Set;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
-
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * LilLexiDoc
@@ -25,15 +24,19 @@ public class LilLexiDoc
 	
 	private Glyph undoneGlyph;
 	
+	private Set<String> dictionary;
+	
 	
 	/**
- * Ctor
+	 * Ctor
+	 * @throws FileNotFoundException 
 	 */
-	public LilLexiDoc() {
+	public LilLexiDoc() throws FileNotFoundException {
 		this.glyphs = new ArrayList<Glyph>();
 		this.currentRow = new Row();
 		this.glyphs.add(currentRow);
 		this.undoneGlyph = null;
+		this.dictionary = getDictionary();
 	}
 	
 	/**
@@ -143,38 +146,46 @@ public class LilLexiDoc
 	}
 	
 	/**
-	 * gets
+	 * gets glyphs
 	 */
 	public List<Glyph> getGlyphs(){
 		return glyphs;
 	}
 	
+	/**
+	 * gets document height / size of glyphs
+	 */
 	public int getDocHeight() {
 		return this.glyphs.size();
 	}
 
+	/**
+	 * spell check
+	 */
 	public boolean spellCheck() throws FileNotFoundException {
-		ArrayList<String> dictionary = getDictionary();
 		String doc = "";
-		for ( Glyph g : glyphs) {
-			doc += g.getChar();
+		for (int i = 0; i < glyphs.size(); i++) {
+			Glyph row = glyphs.get(i);
+			for (int j = 0; j < ((Row) row).getLength(); j++) {
+				Glyph cha = ((Row) row).get(j);
+				doc += cha.getChar();
+			}
 		}
 		String [] docWords = doc.split(" ");
-		/**
-		for (String w : docWords) {
-			for ( String d: dictionary) {
-				if (w != d)
-			}
-			*/
-			return false;
-		//}
-		//return true;
+		
+		for (int i = 0; i < docWords.length; i++) {
+			if (!dictionary.contains(docWords[i])) {return false;}
+		}
+		return true;
 	}
+	
 
-	private ArrayList<String> getDictionary() throws FileNotFoundException {
-		ArrayList<String> words = new ArrayList<String>();
+	/**
+	 * creates dictionary
+	 */
+	private Set<String> getDictionary() throws FileNotFoundException {
+		Set<String> words = new HashSet<>();
 		Scanner scanner = new Scanner(new File("dictionary.txt"));
-		scanner.nextLine();
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             words.add(line);

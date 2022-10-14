@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 /**
  * Lil Lexi Document Editor
  * 
@@ -7,7 +9,8 @@ public class LilLexi
 {
 	static private LilLexiDoc currentDoc = null;
 
-	public static void main(String args[])
+	// File Exception due to dictionary.txt
+	public static void main(String args[]) throws FileNotFoundException
 	{
 		if (currentDoc == null)
 			currentDoc = new LilLexiDoc();
