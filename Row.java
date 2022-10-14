@@ -52,14 +52,6 @@ public class Row extends Glyph {
 			this.glyphs.remove(index);
 			this.length--;		
 		}
-		
-		// Reset height (in case it decreased)
-		for (Glyph g : this.glyphs) {
-			this.height = 0;
-			if (g.getHeight() > this.height) {
-				this.height = g.getHeight();
-			}
-		}
 	}
 	
 	/**
@@ -84,6 +76,13 @@ public class Row extends Glyph {
 	@Override
 	public void draw(GC gc, int y, int x) {
 		for (Glyph g: this.glyphs) {
+			
+			// Always check for height changes before drawing
+			this.height = 0;
+			if (g.getHeight() > this.height) {
+				this.height = g.getHeight();
+			}
+			
 			g.draw(gc, y, x);
 			
 			// Add column spacing
