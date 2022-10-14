@@ -81,7 +81,6 @@ public class LilLexiUI
         canvas.addKeyListener(new KeyListener() {
         	public void keyPressed(KeyEvent e) {
         		char c = e.character;
-        		
      
         		// Conditional for special keys (BACKSPACE, ENTER, <-, ->,)
         		if (e.keyCode == 8) {
@@ -94,7 +93,7 @@ public class LilLexiUI
         			System.out.println("->"); // 
         		} else {
         			System.out.println("key " + e.keyCode);
-        			lexiControl.add(e.character);        			
+        			lexiControl.add(c);        			
         		}
         	}
         	public void keyReleased(KeyEvent e) {}
