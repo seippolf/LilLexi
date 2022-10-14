@@ -53,6 +53,11 @@ public class LilLexiUI
 		canvas.addPaintListener(e -> {
 			System.out.println("PaintListener");
 			Rectangle rect = getShell().getClientArea();
+			/**
+			 * TODO move this to Char and implement on an individual basis
+			 *                         |
+			 *                         V
+			 */
 			e.gc.setBackground(display.getSystemColor(SWT.COLOR_WHITE)); 
             e.gc.fillRectangle(rect.x, rect.y, rect.width, rect.height);
             e.gc.setForeground(display.getSystemColor(SWT.COLOR_BLACK)); 
