@@ -14,7 +14,7 @@ public class Row extends Glyph {
 	public Row() {
 		
 		// Rows should have a null character (for comparison)
-		this.c = Character.MIN_VALUE;
+		this.c = '\n';
 		
 		// Dimensions
 		this.width = 0;
@@ -88,7 +88,7 @@ public class Row extends Glyph {
 			
 			// Add column spacing
 			y += 15; //TODO decide on spacing constant
-		}
+		}			
 	}
 	
 	@Override

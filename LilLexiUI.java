@@ -87,7 +87,7 @@ public class LilLexiUI
         		if (e.keyCode == 8) {
         			lexiControl.backspace();
         		} else if (e.keyCode == 13) {
-        			System.out.println("ENTER");
+        			lexiControl.enter();
         		} else if (e.keyCode == 16777219) {
         			System.out.println("<-");
         		} else if (e.keyCode == 16777220) {

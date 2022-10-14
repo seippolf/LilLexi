@@ -39,6 +39,13 @@ public class LilLexiControl
 	}
 	
 	/**
+	 * add a new line (Row)
+	 */
+	void enter() {
+		currentDoc.addRow();
+	}
+	
+	/**
 	 * remove last Glyph
 	 */
 	void backspace() {
