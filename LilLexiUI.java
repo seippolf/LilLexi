@@ -24,6 +24,7 @@ public class LilLexiUI
 	private Shell shell;
 	private Label statusLabel;
 	private Canvas canvas;	
+	private Font font;
 	
 	/**
 	 * Ctor
@@ -37,6 +38,7 @@ public class LilLexiUI
 						SWT.NO_REDRAW_RESIZE | SWT.V_SCROLL));
 	    getShell().setText("Lil Lexi");
 		getShell().setSize(675,840);
+		this.font = new Font(display, "Arial", 12, SWT.NONE);
 		getShell().setLayout(new GridLayout());	
 	}
 		
@@ -64,15 +66,14 @@ public class LilLexiUI
 			e.gc.setBackground(display.getSystemColor(SWT.COLOR_WHITE)); 
             e.gc.fillRectangle(rect.x, rect.y, rect.width, rect.height);
             e.gc.setForeground(display.getSystemColor(SWT.COLOR_BLACK)); 
-    		Font font = new Font(display, "Arial", 12, SWT.NONE);
-    		e.gc.setFont(font);
+            
+    		e.gc.setFont(this.font);
     		
     		List<Glyph> glyphs = currentDoc.getGlyphs();
     		
     		int column = 0, row = 0;
     		for (Glyph g: glyphs)
     		{
-//    			System.out.println(g);
     			g.draw(e.gc, column, row);			
     			row += g.getHeight();
     		}
