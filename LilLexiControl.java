@@ -3,6 +3,13 @@ import java.io.FileNotFoundException;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
+/*
+ * AUTHOR: Justin Johnson & Jasmine Ying
+ * FILE: LilLexiControl.java
+ * ASSIGNMENT: Lil Lexi
+ * COURSE: CSC 335; Fall 2022
+ */
+
 /**
  * Controller
  */

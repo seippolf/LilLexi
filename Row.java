@@ -1,6 +1,13 @@
 import java.util.ArrayList;
 import org.eclipse.swt.graphics.GC;
 
+/*
+ * AUTHOR: Justin Johnson & Jasmine Ying
+ * FILE: Row.java
+ * ASSIGNMENT: Lil Lexi
+ * COURSE: CSC 335; Fall 2022
+ */
+
 public class Row extends Glyph {
 	
 	private char c;

@@ -1,5 +1,12 @@
 import org.eclipse.swt.graphics.GC;
 
+/*
+ * AUTHOR: Justin Johnson & Jasmine Ying
+ * FILE: Glyph.java
+ * ASSIGNMENT: Lil Lexi
+ * COURSE: CSC 335; Fall 2022
+ */
+
 /**
  * Glyph
  */

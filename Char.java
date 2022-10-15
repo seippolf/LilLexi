@@ -2,6 +2,13 @@ import java.awt.Font;
 
 import org.eclipse.swt.graphics.GC;
 
+/*
+ * AUTHOR: Justin Johnson & Jasmine Ying
+ * FILE: Char.java
+ * ASSIGNMENT: Lil Lexi
+ * COURSE: CSC 335; Fall 2022
+ */
+
 public class Char extends Glyph {
 	
 	private char c;

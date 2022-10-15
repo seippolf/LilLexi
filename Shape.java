@@ -1,5 +1,12 @@
 import org.eclipse.swt.graphics.GC;
 
+/*
+ * AUTHOR: Justin Johnson & Jasmine Ying
+ * FILE: Shape.java
+ * ASSIGNMENT: Lil Lexi
+ * COURSE: CSC 335; Fall 2022
+ */
+
 public class Shape extends Glyph {
 	
 	private char c;
