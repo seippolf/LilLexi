@@ -11,6 +11,12 @@ import org.eclipse.swt.events.KeyListener;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+/*
+ * AUTHOR: Justin Johnson & Jasmine Ying
+ * FILE: LilLexiUI.java
+ * ASSIGNMENT: Lil Lexi
+ * COURSE: CSC 335; Fall 2022
+ */
 
 /**
  * LilLexiUI

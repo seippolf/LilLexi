@@ -1,5 +1,12 @@
 import java.io.FileNotFoundException;
 
+/*
+ * AUTHOR: Justin Johnson & Jasmine Ying
+ * FILE: LilLexi.java
+ * ASSIGNMENT: Lil Lexi
+ * COURSE: CSC 335; Fall 2022
+ */
+
 /**
  * Lil Lexi Document Editor
  * 

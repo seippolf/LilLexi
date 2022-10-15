@@ -3,6 +3,13 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 
+/*
+ * AUTHOR: Justin Johnson & Jasmine Ying
+ * FILE: Picture.java
+ * ASSIGNMENT: Lil Lexi
+ * COURSE: CSC 335; Fall 2022
+ */
+
 public class Picture extends Glyph {
 	
 	private char c;

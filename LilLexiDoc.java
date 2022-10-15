@@ -1,5 +1,13 @@
+/*
+ * AUTHOR: Justin Johnson & Jasmine Ying
+ * FILE: LilLexiDoc.java
+ * ASSIGNMENT: Lil Lexi
+ * COURSE: CSC 335; Fall 2022
+ */
+
 /**
  * Lil Lexi Document Model
+
  * 
  */
 import java.util.List;
