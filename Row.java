@@ -32,6 +32,11 @@ public class Row extends Glyph {
 		this.glyphs = new ArrayList<>();
 	}
 	
+	/**
+	 * Add a Glyph to list in row
+	 * 
+	 * @param g
+	 */
 	public void add(Glyph g) {
 		
 		// Ensure height is equal to height of tallest child

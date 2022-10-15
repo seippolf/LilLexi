@@ -19,6 +19,7 @@ public class Shape extends Glyph {
 		this.height = height;
 	}
 	
+	@Override
 	public void draw(GC gc, int x, int y) {
 		gc.drawRectangle(x, y, this.width, this.height);
 	}

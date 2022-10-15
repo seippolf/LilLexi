@@ -24,21 +24,7 @@ public class LilLexiControl
 	{
 		this.currentDoc = doc;
 	}
-	
-	/**
-	 * Curse forward
-	 */
-	void next() {
 		
-	}
-	
-	/**
-	 * Curse backward
-	 */
-	void prev() {
-		
-	}
-	
 	/**
 	 * add Char glyph
 	 */

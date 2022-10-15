@@ -21,6 +21,7 @@ public class Char extends Glyph {
 		this.height = 20;
 	}
 	
+	@Override
 	public void draw(GC gc, int x, int y) {
 		gc.drawString("" + c, x, y);
 	}

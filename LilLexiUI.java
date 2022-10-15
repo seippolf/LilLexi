@@ -85,6 +85,7 @@ public class LilLexiUI
     		}
 		});	
 		
+		//---- Mouse events
         canvas.addMouseListener(new MouseListener() {
             public void mouseDown(MouseEvent e) {
             	System.out.println("mouseDown in canvas");
@@ -93,6 +94,7 @@ public class LilLexiUI
             public void mouseDoubleClick(MouseEvent e) {} 
         });
         
+        //---- Keyboard events
         canvas.addKeyListener(new KeyListener() {
         	public void keyPressed(KeyEvent e) {
         		char c = e.character;
